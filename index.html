@@ -63,20 +63,22 @@ body::before{
 /* LOGO */
 
 .logo{
-    width:120px;
-    height:120px;
+    width:150px;
+    height:150px;
     border-radius:50%;
     overflow:hidden;
     margin:auto;
     margin-bottom:20px;
-    border:2px solid #00f7ff;
-    box-shadow:0 0 20px #00f7ff;
+    border:3px solid #00f7ff;
+    box-shadow:0 0 20px #00f7ff, inset 0 0 20px rgba(0,255,255,0.3);
+    background:black;
 }
 
 .logo img{
     width:100%;
     height:100%;
     object-fit:cover;
+    display:block;
 }
 
 /* TEXT */
@@ -315,7 +317,6 @@ button:hover{
 <div class="container glow" id="loginBox">
 
     <div class="logo">
-        <img src="https://i.imgur.com/e5Z7Z4x.png">
     </div>
 
     <h2>AUTHENTICATE TO PROCEED</h2>
@@ -337,7 +338,7 @@ button:hover{
 <div class="result-box granted" id="welcomePanel">
     <div class="big-icon">⚡</div>
     <div class="granted-text">WELCOME TO</div>
-    <div class="small" style="font-size:34px;">THE PANEL OF <span class="username">ZOHAIB</span></div>
+    <div class="small" style="font-size:34px;">THE PANEL OF <span class="username">NEXUS (Z) HACK</span></div>
     <div class="loader"></div>
 </div>
 
@@ -345,7 +346,6 @@ button:hover{
     <div class="big-icon">⚠️</div>
     <div class="denied-text">ACCESS DENIED</div>
     <div class="small">Incorrect username or password.</div>
-    <button onclick="retry()">RETRY</button>
 </div>
 
 <div class="dashboard" id="dashboard">
@@ -387,17 +387,15 @@ button:hover{
 <div class="card" data-title="WiFi Analyzer Tool" data-price="3000Rs">🛜 WIFI ANALYZER</div>
 <div class="card" data-title="Gallery Crash Test" data-price="2000Rs">👾 GALLERY CRASH TEST</div>
 <div class="card" data-title="TikTok Live Trick System" data-price="4000Rs">🎥 TIKTOK LIVE TRICK</div>
+    </div>
 
-
-
+</div>
 
 <div class="popup" id="popup">
     <h1 id="popupTitle">Service</h1>
     <p id="popupPrice">Price</p>
     <button onclick="closePopup()">CLOSE</button>
 </div>
-
-
 
 <audio id="successSound">
 <source src="https://www.soundjay.com/buttons/sounds/button-3.mp3">
@@ -440,6 +438,44 @@ drops[i]++;
 
 setInterval(draw,35);
 
+// Sigma Boy Deep Voice - Medium Speed
+function speakSigmaVoice(text) {
+    return new Promise((resolve) => {
+        window.speechSynthesis.cancel();
+        
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1.0;
+        utterance.pitch = 0.7;
+        utterance.volume = 1;
+        
+        const voices = window.speechSynthesis.getVoices();
+        
+        let selectedVoice = voices.find(voice => 
+            voice.name.includes('Google UK English Male') ||
+            voice.name.includes('David') ||
+            voice.name.includes('Microsoft Mark')
+        );
+        
+        if (!selectedVoice) {
+            selectedVoice = voices.find(voice => voice.name.includes('Male'));
+        }
+        
+        if (selectedVoice) {
+            utterance.voice = selectedVoice;
+        }
+        
+        utterance.onend = () => {
+            resolve();
+        };
+        
+        window.speechSynthesis.speak(utterance);
+    });
+}
+
+window.speechSynthesis.onvoiceschanged = function() {
+    window.speechSynthesis.getVoices();
+};
+
 function login(){
 let user=document.getElementById("username").value;
 let pass=document.getElementById("password").value;
@@ -449,26 +485,45 @@ document.getElementById("loginBox").style.display="none";
 document.getElementById("grantedBox").style.display="block";
 document.getElementById("successSound").play();
 
-setTimeout(()=>{
-document.getElementById("grantedBox").style.display="none";
-document.getElementById("welcomePanel").style.display="block";
-},3000);
+// First voice - Access Granted
+speakSigmaVoice("Access granted. Welcome Zohaib").then(async () => {
+    // Show welcome panel after first voice ends
+    setTimeout(()=>{
+        document.getElementById("grantedBox").style.display="none";
+        document.getElementById("welcomePanel").style.display="block";
+    }, 1000);
 
-setTimeout(()=>{
-document.getElementById("welcomePanel").style.display="none";
-document.getElementById("dashboard").style.display="block";
-},6500);
+    // Wait 1 second then play second voice
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // Second voice - Welcome to panel (pura bolne ke baad hi dashboard khulega)
+    await speakSigmaVoice("Welcome to the panel of Nexus Z Hack");
+    
+    // Ab dashboard khol do
+    document.getElementById("welcomePanel").style.display="none";
+    document.getElementById("dashboard").style.display="block";
+});
 }
 else{
 document.getElementById("loginBox").style.display="none";
 document.getElementById("deniedBox").style.display="block";
 document.getElementById("errorSound").play();
+
+// Access Denied voice - pura bolne ke baad retry button show hoga
+speakSigmaVoice("Access denied. Incorrect username or password").then(() => {
+    const retryBtn = document.createElement("button");
+    retryBtn.textContent = "RETRY";
+    retryBtn.onclick = retry;
+    document.getElementById("deniedBox").appendChild(retryBtn);
+});
 }
 }
 
 function retry(){
 document.getElementById("deniedBox").style.display="none";
 document.getElementById("loginBox").style.display="block";
+
+speakSigmaVoice("Please enter the username and password");
 }
 
 const cards = document.querySelectorAll(".card");
@@ -483,6 +538,8 @@ cards.forEach(card => {
         document.getElementById("popupPrice").innerText = "Price: " + price;
 
         document.getElementById("popup").style.display = "block";
+        
+        speakSigmaVoice("Contact with Mister Zohaib for more information about this service");
     });
 });
 
