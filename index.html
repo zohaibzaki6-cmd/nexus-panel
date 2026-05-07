@@ -146,6 +146,7 @@ button:hover{
     border-radius:25px;
     text-align:center;
     background:#03051a;
+    z-index:100;
 }
 
 .granted{
@@ -213,15 +214,113 @@ button:hover{
 }
 
 @keyframes glow{
-
     from{
         box-shadow:0 0 10px #00f7ff;
     }
-
     to{
         box-shadow:0 0 30px #00f7ff;
     }
+}
 
+/* TRANSITION SCREEN */
+
+.transition-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    z-index: 200;
+    overflow: hidden;
+}
+
+.transition-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+}
+
+.glitch-text {
+    font-size: 48px;
+    font-weight: bold;
+    letter-spacing: 8px;
+    color: #00f7ff;
+    text-shadow: 
+        2px 2px 0px #ff00ff,
+        -2px -2px 0px #00ff00,
+        0 0 20px #00f7ff;
+    animation: glitch 0.3s infinite;
+}
+
+@keyframes glitch {
+    0% {
+        text-shadow: 
+            2px 2px 0px #ff00ff,
+            -2px -2px 0px #00ff00,
+            0 0 20px #00f7ff;
+        transform: translate(0);
+    }
+    20% {
+        text-shadow: 
+            -2px -2px 0px #ff00ff,
+            2px 2px 0px #00ff00,
+            0 0 20px #00f7ff;
+        transform: translate(-5px, 5px);
+    }
+    40% {
+        text-shadow: 
+            2px -2px 0px #ff00ff,
+            -2px 2px 0px #00ff00,
+            0 0 20px #00f7ff;
+        transform: translate(5px, -5px);
+    }
+    60% {
+        text-shadow: 
+            -2px 2px 0px #ff00ff,
+            2px -2px 0px #00ff00,
+            0 0 20px #00f7ff;
+        transform: translate(-5px, -5px);
+    }
+    80% {
+        text-shadow: 
+            2px 2px 0px #ff00ff,
+            -2px -2px 0px #00ff00,
+            0 0 20px #00f7ff;
+        transform: translate(5px, 5px);
+    }
+    100% {
+        text-shadow: 
+            -2px -2px 0px #ff00ff,
+            2px 2px 0px #00ff00,
+            0 0 20px #00f7ff;
+        transform: translate(0);
+    }
+}
+
+.scanline-effect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, transparent 24%, rgba(255, 0, 255, 0.05) 25%, rgba(255, 0, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(255, 0, 255, 0.05) 75%, rgba(255, 0, 255, 0.05) 76%, transparent 77%, transparent);
+    background-size: 100% 4px;
+    animation: scan 8s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes scan {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(10px);
+    }
 }
 
 /* DASHBOARD */
@@ -236,6 +335,7 @@ button:hover{
     overflow:auto;
     padding:40px;
     background:rgba(0,0,0,0.92);
+    z-index:50;
 }
 
 .dashboard-title{
@@ -335,6 +435,13 @@ button:hover{
     <div class="loader"></div>
 </div>
 
+<div class="transition-screen" id="transitionScreen">
+    <div class="transition-content">
+        <div class="glitch-text" id="glitchText">INITIALIZING NEXUS CORE</div>
+    </div>
+    <div class="scanline-effect"></div>
+</div>
+
 <div class="result-box granted" id="welcomePanel">
     <div class="big-icon">⚡</div>
     <div class="granted-text">WELCOME TO</div>
@@ -403,6 +510,10 @@ button:hover{
 
 <audio id="errorSound">
 <source src="https://www.soundjay.com/buttons/sounds/button-10.mp3">
+</audio>
+
+<audio id="transitionSound">
+<source src="https://www.soundjay.com/buttons/sounds/beep-09.mp3">
 </audio>
 
 <script>
@@ -476,6 +587,40 @@ window.speechSynthesis.onvoiceschanged = function() {
     window.speechSynthesis.getVoices();
 };
 
+// Transition Functions
+function startHeavyTransition() {
+    return new Promise((resolve) => {
+        const transitionScreen = document.getElementById("transitionScreen");
+        const glitchText = document.getElementById("glitchText");
+        const transitionSound = document.getElementById("transitionSound");
+        
+        transitionScreen.style.display = "block";
+        transitionSound.play();
+        
+        const messages = [
+            "INITIALIZING NEXUS CORE",
+            "BREAKING FIREWALLS",
+            "ACCESSING MAINFRAME",
+            "LOADING NEXUS Z",
+            "SYSTEM READY"
+        ];
+        
+        let index = 0;
+        const interval = setInterval(() => {
+            if (index < messages.length) {
+                glitchText.textContent = messages[index];
+                index++;
+            } else {
+                clearInterval(interval);
+                setTimeout(() => {
+                    transitionScreen.style.display = "none";
+                    resolve();
+                }, 500);
+            }
+        }, 400);
+    });
+}
+
 function login(){
 let user=document.getElementById("username").value;
 let pass=document.getElementById("password").value;
@@ -485,21 +630,20 @@ document.getElementById("loginBox").style.display="none";
 document.getElementById("grantedBox").style.display="block";
 document.getElementById("successSound").play();
 
-// First voice - Access Granted
+// STEP 1: ACCESS GRANTED VOICE
 speakSigmaVoice("Access granted. Welcome Zohaib").then(async () => {
-    // Show welcome panel after first voice ends
-    setTimeout(()=>{
-        document.getElementById("grantedBox").style.display="none";
-        document.getElementById("welcomePanel").style.display="block";
-    }, 1000);
-
-    // Wait 1 second then play second voice
-    await new Promise(resolve => setTimeout(resolve, 1500));
     
-    // Second voice - Welcome to panel (pura bolne ke baad hi dashboard khulega)
+    // STEP 2: START HEAVY TRANSITION
+    await startHeavyTransition();
+    
+    // STEP 3: SHOW WELCOME PANEL
+    document.getElementById("grantedBox").style.display="none";
+    document.getElementById("welcomePanel").style.display="block";
+    
+    // STEP 4: WELCOME PANEL VOICE
     await speakSigmaVoice("Welcome to the panel of Nexus Z Hack");
     
-    // Ab dashboard khol do
+    // STEP 5: SHOW DASHBOARD
     document.getElementById("welcomePanel").style.display="none";
     document.getElementById("dashboard").style.display="block";
 });
@@ -509,7 +653,6 @@ document.getElementById("loginBox").style.display="none";
 document.getElementById("deniedBox").style.display="block";
 document.getElementById("errorSound").play();
 
-// Access Denied voice - pura bolne ke baad retry button show hoga
 speakSigmaVoice("Access denied. Incorrect username or password").then(() => {
     const retryBtn = document.createElement("button");
     retryBtn.textContent = "RETRY";
