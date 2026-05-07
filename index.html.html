@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS CONTROL PANEL</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    overflow:hidden;
+    background:#020202;
+    font-family:Courier New, monospace;
+    color:#00f7ff;
+}
+
+/* MATRIX BACKGROUND */
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* SCANLINES */
+
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:
+    linear-gradient(rgba(255,255,255,0.02) 50%, transparent 50%);
+    background-size:100% 4px;
+    pointer-events:none;
+    z-index:999;
+}
+
+/* LOGIN CONTAINER */
+
+.container{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:420px;
+    padding:40px;
+    border:1px solid rgba(0,255,255,0.5);
+    border-radius:25px;
+    background:rgba(0,0,0,0.75);
+    box-shadow:0 0 25px #00f7ff55;
+    backdrop-filter:blur(6px);
+    text-align:center;
+}
+
+/* LOGO */
+
+.logo{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    overflow:hidden;
+    margin:auto;
+    margin-bottom:20px;
+    border:2px solid #00f7ff;
+    box-shadow:0 0 20px #00f7ff;
+}
+
+.logo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* TEXT */
+
+h2{
+    color:#bbbbbb;
+    letter-spacing:5px;
+    margin-bottom:30px;
+    font-size:20px;
+}
+
+/* INPUTS */
+
+input{
+    width:100%;
+    padding:15px;
+    margin:15px 0;
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:12px;
+    color:white;
+    font-size:18px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#00f7ff;
+    box-shadow:0 0 10px #00f7ff;
+}
+
+/* BUTTON */
+
+button{
+    width:100%;
+    padding:15px;
+    margin-top:20px;
+    border-radius:12px;
+    border:1px solid #00f7ff;
+    background:transparent;
+    color:#00f7ff;
+    font-size:22px;
+    font-weight:bold;
+    letter-spacing:4px;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 15px #00f7ff55;
+}
+
+button:hover{
+    background:#00f7ff;
+    color:black;
+    box-shadow:0 0 30px #00f7ff;
+}
+
+/* RESULT BOX */
+
+.result-box{
+    display:none;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:520px;
+    padding:60px;
+    border-radius:25px;
+    text-align:center;
+    background:#03051a;
+}
+
+.granted{
+    border:1px solid #00ffcc;
+    box-shadow:0 0 30px #00ffcc;
+}
+
+.denied{
+    border:1px solid #ff004c;
+    box-shadow:0 0 30px #ff004c;
+}
+
+.big-icon{
+    font-size:80px;
+    margin-bottom:20px;
+}
+
+.granted-text{
+    color:#00f7ff;
+    font-size:45px;
+    letter-spacing:6px;
+    margin-bottom:20px;
+}
+
+.denied-text{
+    color:#ff2f74;
+    font-size:42px;
+    letter-spacing:5px;
+    margin-bottom:20px;
+}
+
+.small{
+    color:white;
+    font-size:24px;
+    margin-bottom:25px;
+}
+
+.username{
+    color:#00f7ff;
+    font-weight:bold;
+}
+
+/* LOADER */
+
+.loader{
+    width:70px;
+    height:70px;
+    border:7px solid #222;
+    border-top:7px solid #00f7ff;
+    border-radius:50%;
+    margin:auto;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    100%{
+        transform:rotate(360deg);
+    }
+}
+
+/* GLOW */
+
+.glow{
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+
+    from{
+        box-shadow:0 0 10px #00f7ff;
+    }
+
+    to{
+        box-shadow:0 0 30px #00f7ff;
+    }
+
+}
+
+/* DASHBOARD */
+
+.dashboard{
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    overflow:auto;
+    padding:40px;
+    background:rgba(0,0,0,0.92);
+}
+
+.dashboard-title{
+    text-align:center;
+    color:#00f7ff;
+    font-size:50px;
+    letter-spacing:8px;
+    margin-bottom:50px;
+    text-shadow:
+    0 0 10px #00f7ff,
+    0 0 20px #00f7ff,
+    0 0 40px #00f7ff;
+}
+
+.panel-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.card{
+    padding:35px;
+    border-radius:20px;
+    border:1px solid rgba(0,255,255,0.5);
+    background:rgba(0,0,0,0.7);
+    color:#00f7ff;
+    font-size:22px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.4s;
+    box-shadow:0 0 15px rgba(0,255,255,0.2);
+    backdrop-filter:blur(5px);
+}
+
+.card:hover{
+    transform:scale(1.05);
+    background:#03151c;
+    box-shadow:0 0 15px #00f7ff,0 0 30px #00f7ff,0 0 60px #00f7ff;
+}
+
+.popup{
+    display:none;
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:420px;
+    padding:40px;
+    background:#020b12;
+    border:1px solid #00f7ff;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 0 40px #00f7ff;
+    z-index:9999;
+}
+
+.popup h1{
+    color:#00f7ff;
+    margin-bottom:20px;
+}
+
+.popup p{
+    color:white;
+    margin-bottom:25px;
+    font-size:18px;
+}
+
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:#00f7ff;border-radius:10px;}
+::-webkit-scrollbar-track{background:#111;}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="container glow" id="loginBox">
+
+    <div class="logo">
+        <img src="https://i.imgur.com/e5Z7Z4x.png">
+    </div>
+
+    <h2>AUTHENTICATE TO PROCEED</h2>
+
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">INITIALIZE</button>
+
+</div>
+
+<div class="result-box granted" id="grantedBox">
+    <div class="big-icon">✓</div>
+    <div class="granted-text">ACCESS GRANTED</div>
+    <div class="small">Welcome, <span class="username">Zohaib</span></div>
+    <div class="loader"></div>
+</div>
+
+<div class="result-box granted" id="welcomePanel">
+    <div class="big-icon">⚡</div>
+    <div class="granted-text">WELCOME TO</div>
+    <div class="small" style="font-size:34px;">THE PANEL OF <span class="username">ZOHAIB</span></div>
+    <div class="loader"></div>
+</div>
+
+<div class="result-box denied" id="deniedBox">
+    <div class="big-icon">⚠️</div>
+    <div class="denied-text">ACCESS DENIED</div>
+    <div class="small">Incorrect username or password.</div>
+    <button onclick="retry()">RETRY</button>
+</div>
+
+<div class="dashboard" id="dashboard">
+    <h1 class="dashboard-title">NEXUS CONTROL CENTER</h1>
+
+    <div class="panel-grid">
+<div class="card" data-title="Instagram Module" data-price="2000Rs">👩🏻‍💻Instagram Hack</div>
+<div class="card" data-title="Snapchat Module" data-price="2500Rs">👩🏻‍💻Snapchat Hack</div>
+<div class="card" data-title="Facebook Module" data-price="1800Rs">👩🏻‍💻Facebook Hack</div>
+<div class="card" data-title="YouTube Module" data-price="3000Rs">👩🏻‍💻You tube Hack</div>
+<div class="card" data-title="Full Mobile Control System" data-price="5000Rs">👩🏻‍💻Full Mobile Hack</div>
+<div class="card" data-title="SIM Details System" data-price="1500Rs">👩🏻‍💻Sim Details</div>
+<div class="card" data-title="CNIC Information System" data-price="4000Rs">👩🏻‍💻CNIC Information</div>
+<div class="card" data-title="Family Tracking System" data-price="3500Rs">👩🏻‍💻Family Tree</div>
+<div class="card" data-title="GPS Location Tracker" data-price="4500Rs">📍Location Trace</div>
+<div class="card" data-title="Camera Access Module" data-price="6000Rs">📷Camera Hack</div>
+<div class="card" data-title="Social Dashboard System" data-price="2200Rs">Social Dashboard</div>
+<div class="card" data-title="Gallery Control Module" data-price="2700Rs">📸 GALLERY MODULE</div>
+<div class="card" data-title="Mobile Device Module" data-price="3200Rs">📱 MOBILE MODULE</div>
+<div class="card" data-title="WhatsApp Control Module" data-price="3500Rs">🪀 WHATSAPP MODULE</div>
+<div class="card" data-title="Virus Simulation Tool" data-price="1000Rs">🦠 VIRUS SIMULATOR</div>
+<div class="card" data-title="Phishing Awareness Tool" data-price="2800Rs">🔥 PHISHING SIMULATION</div>
+<div class="card" data-title="Number Control System" data-price="3300Rs">🕸️ NUMBER CONTROL</div>
+<div class="card" data-title="Global Number Network" data-price="4200Rs">9️⃣9️⃣4️⃣ GLOBAL NUMBER SYSTEM</div>
+<div class="card" data-title="Transaction Demo System" data-price="3900Rs">🤏 TRANSACTION DEMO APK</div>
+<div class="card" data-title="History Generator Tool" data-price="2100Rs">🫶 HISTORY GENERATOR</div>
+<div class="card" data-title="Camera Module System" data-price="6000Rs">📸 CAMERA MODULE</div>
+<div class="card" data-title="TD Toolkit System" data-price="2500Rs">🔩 TD TOOLKIT</div>
+<div class="card" data-title="Fouji Toolkit System" data-price="2700Rs">🔬 FOUJI TOOLKIT</div>
+<div class="card" data-title="SMS Creator Tool" data-price="1600Rs">💬 SMS CREATOR</div>
+<div class="card" data-title="Hacker Database Access" data-price="7000Rs">🔎 HACKER DATABASE</div>
+<div class="card" data-title="Bit3Root Toolkit" data-price="4500Rs">🔰 BIT3ROOT TOOLKIT</div>
+<div class="card" data-title="Suliman Toolkit" data-price="3800Rs">🔮 SULIMAN TOOLKIT</div>
+<div class="card" data-title="Zero Tool System" data-price="5000Rs">☠️ ZERO TOOL</div>
+<div class="card" data-title="Zero Tool Advanced" data-price="6500Rs">😈 ZERO TOOL 2.0</div>
+<div class="card" data-title="WiFi Analyzer Tool" data-price="3000Rs">🛜 WIFI ANALYZER</div>
+<div class="card" data-title="Gallery Crash Test" data-price="2000Rs">👾 GALLERY CRASH TEST</div>
+<div class="card" data-title="TikTok Live Trick System" data-price="4000Rs">🎥 TIKTOK LIVE TRICK</div>
+<div class="card" data-title="YouTube Advanced Module" data-price="3000Rs">You tube Hack</div>
+
+
+
+<div class="popup" id="popup">
+    <h1 id="popupTitle">Service</h1>
+    <p id="popupPrice">Price</p>
+    <button onclick="closePopup()">CLOSE</button>
+</div>
+
+
+
+<audio id="successSound">
+<source src="https://www.soundjay.com/buttons/sounds/button-3.mp3">
+</audio>
+
+<audio id="errorSound">
+<source src="https://www.soundjay.com/buttons/sounds/button-10.mp3">
+</audio>
+
+<script>
+
+const canvas=document.getElementById("matrix");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+const letters="01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const fontSize=14;
+const columns=canvas.width/fontSize;
+const drops=[];
+
+for(let x=0;x<columns;x++) drops[x]=1;
+
+function draw(){
+ctx.fillStyle="rgba(0,0,0,0.06)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="#00ff66";
+ctx.font=fontSize+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+let text=letters[Math.floor(Math.random()*letters.length)];
+ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+
+if(drops[i]*fontSize>canvas.height && Math.random()>0.975) drops[i]=0;
+drops[i]++;
+}
+}
+
+setInterval(draw,35);
+
+function login(){
+let user=document.getElementById("username").value;
+let pass=document.getElementById("password").value;
+
+if(user==="Zohaib" && pass==="1122"){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("grantedBox").style.display="block";
+document.getElementById("successSound").play();
+
+setTimeout(()=>{
+document.getElementById("grantedBox").style.display="none";
+document.getElementById("welcomePanel").style.display="block";
+},3000);
+
+setTimeout(()=>{
+document.getElementById("welcomePanel").style.display="none";
+document.getElementById("dashboard").style.display="block";
+},6500);
+}
+else{
+document.getElementById("loginBox").style.display="none";
+document.getElementById("deniedBox").style.display="block";
+document.getElementById("errorSound").play();
+}
+}
+
+function retry(){
+document.getElementById("deniedBox").style.display="none";
+document.getElementById("loginBox").style.display="block";
+}
+
+const cards = document.querySelectorAll(".card");
+
+cards.forEach(card => {
+    card.addEventListener("click", () => {
+
+        const title = card.getAttribute("data-title");
+        const price = card.getAttribute("data-price");
+
+        document.getElementById("popupTitle").innerText = title;
+        document.getElementById("popupPrice").innerText = "Price: " + price;
+
+        document.getElementById("popup").style.display = "block";
+    });
+});
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
