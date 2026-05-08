@@ -16,8 +16,10 @@
 body{
     overflow:hidden;
     background:#020202;
-    font-family:Courier New, monospace;
+    font-family: Arial, sans-serif;
     color:#00f7ff;
+    font-weight: 900;
+    letter-spacing: 2px;
 }
 
 /* MATRIX BACKGROUND */
@@ -52,10 +54,10 @@ body::before{
     transform:translate(-50%,-50%);
     width:420px;
     padding:40px;
-    border:1px solid rgba(0,255,255,0.5);
+    border:2px solid rgba(0,255,255,0.5);
     border-radius:25px;
     background:rgba(0,0,0,0.75);
-    box-shadow:0 0 25px #00f7ff55;
+    box-shadow:0 0 25px #00f7ff55, inset 0 0 20px rgba(0,255,255,0.1);
     backdrop-filter:blur(6px);
     text-align:center;
 }
@@ -85,9 +87,11 @@ body::before{
 
 h2{
     color:#bbbbbb;
-    letter-spacing:5px;
+    letter-spacing:3px;
     margin-bottom:30px;
-    font-size:20px;
+    font-size:24px;
+    font-weight:900;
+    text-shadow: 0 0 10px #00f7ff;
 }
 
 /* INPUTS */
@@ -97,16 +101,34 @@ input{
     padding:15px;
     margin:15px 0;
     background:transparent;
-    border:1px solid rgba(255,255,255,0.1);
+    border:2px solid rgba(255,255,255,0.1);
     border-radius:12px;
     color:white;
-    font-size:18px;
+    font-size:16px;
     outline:none;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+input::placeholder {
+    color: rgba(255,255,255,0.5);
 }
 
 input:focus{
     border-color:#00f7ff;
-    box-shadow:0 0 10px #00f7ff;
+    box-shadow:0 0 15px #00f7ff, inset 0 0 10px rgba(0,255,255,0.2);
+}
+
+input:not(:placeholder-shown) {
+    color: #00ff00 !important;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+input:not(:placeholder-shown):focus {
+    border-color: #00ff00;
+    box-shadow: 0 0 15px #00ff00, inset 0 0 10px rgba(0,255,255,0.2);
 }
 
 /* BUTTON */
@@ -116,15 +138,17 @@ button{
     padding:15px;
     margin-top:20px;
     border-radius:12px;
-    border:1px solid #00f7ff;
+    border:2px solid #00f7ff;
     background:transparent;
     color:#00f7ff;
-    font-size:22px;
-    font-weight:bold;
-    letter-spacing:4px;
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:2px;
     cursor:pointer;
     transition:0.3s;
     box-shadow:0 0 15px #00f7ff55;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
 }
 
 button:hover{
@@ -150,43 +174,57 @@ button:hover{
 }
 
 .granted{
-    border:1px solid #00ffcc;
+    border:2px solid #00ffcc;
     box-shadow:0 0 30px #00ffcc;
 }
 
 .denied{
-    border:1px solid #ff004c;
+    border:2px solid #ff004c;
     box-shadow:0 0 30px #ff004c;
 }
 
 .big-icon{
     font-size:80px;
     margin-bottom:20px;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 .granted-text{
     color:#00f7ff;
-    font-size:45px;
-    letter-spacing:6px;
+    font-size:48px;
+    letter-spacing:2px;
     margin-bottom:20px;
+    font-weight:900;
+    text-shadow: 0 0 20px #00f7ff;
 }
 
 .denied-text{
     color:#ff2f74;
-    font-size:42px;
-    letter-spacing:5px;
+    font-size:45px;
+    letter-spacing:2px;
     margin-bottom:20px;
+    font-weight:900;
+    text-shadow: 0 0 20px #ff2f74;
 }
 
 .small{
     color:white;
-    font-size:24px;
+    font-size:22px;
     margin-bottom:25px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .username{
     color:#00f7ff;
-    font-weight:bold;
+    font-weight:900;
+    text-shadow: 0 0 10px #00f7ff;
 }
 
 /* LOADER */
@@ -246,15 +284,17 @@ button:hover{
 }
 
 .glitch-text {
-    font-size: 48px;
-    font-weight: bold;
-    letter-spacing: 8px;
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: 4px;
     color: #00f7ff;
     text-shadow: 
         2px 2px 0px #ff00ff,
         -2px -2px 0px #00ff00,
         0 0 20px #00f7ff;
     animation: glitch 0.3s infinite;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
 }
 
 @keyframes glitch {
@@ -323,6 +363,184 @@ button:hover{
     }
 }
 
+/* GRID */
+
+.cyber-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, 0.1) 25%, rgba(0, 255, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.1) 75%, rgba(0, 255, 255, 0.1) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.1) 25%, rgba(0, 255, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.1) 75%, rgba(0, 255, 255, 0.1) 76%, transparent 77%, transparent);
+    background-size: 50px 50px;
+    animation: gridMove 15s linear infinite;
+    opacity: 0.2;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+/* STARS */
+
+.stars-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: #00f7ff;
+    border-radius: 50%;
+    animation: starPulse 2s infinite;
+}
+
+@keyframes starPulse {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+}
+
+/* LOADING SCREEN */
+
+.loading-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000000, #0a0a1a);
+    z-index: 250;
+    overflow: hidden;
+}
+
+.loading-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    z-index: 10;
+}
+
+.loading-title {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #00f7ff;
+    text-shadow: 
+        0 0 20px #00f7ff,
+        0 0 40px #00f7ff,
+        0 0 60px #00ff00,
+        inset 0 0 20px rgba(0,255,255,0.3);
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+    animation: titleGlow 2s infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 
+            0 0 20px #00f7ff,
+            0 0 40px #00f7ff,
+            inset 0 0 20px rgba(0,255,255,0.3);
+    }
+    to {
+        text-shadow: 
+            0 0 30px #00f7ff,
+            0 0 60px #00f7ff,
+            0 0 90px #ff00ff,
+            inset 0 0 30px rgba(0,255,255,0.5);
+    }
+}
+
+.loading-bar-container {
+    width: 400px;
+    height: 10px;
+    border: 2px solid #00f7ff;
+    margin: auto;
+    margin-bottom: 30px;
+    background: rgba(0, 247, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px #00f7ff;
+}
+
+.loading-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #00f7ff, #00ff00, #ff00ff, #00f7ff);
+    background-size: 200% 100%;
+    animation: loadingBarMove 2s infinite;
+    box-shadow: 0 0 15px #00f7ff;
+}
+
+@keyframes loadingBarMove {
+    0% {
+        width: 0%;
+        background-position: 0% 0%;
+    }
+    50% {
+        width: 100%;
+        background-position: 100% 0%;
+    }
+    100% {
+        width: 0%;
+        background-position: 200% 0%;
+    }
+}
+
+.loading-percentage {
+    color: #00f7ff;
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px #00f7ff;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+}
+
+.loading-text {
+    color: #00ff00;
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0.3; }
+}
+
+.status-line {
+    margin-top: 30px;
+    color: #ff00ff;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+    animation: statusFlash 1s infinite;
+}
+
+@keyframes statusFlash {
+    0%, 100% { color: #ff00ff; text-shadow: 0 0 10px #ff00ff; }
+    50% { color: #00ff00; text-shadow: 0 0 10px #00ff00; }
+}
+
 /* DASHBOARD */
 
 .dashboard{
@@ -342,12 +560,15 @@ button:hover{
     text-align:center;
     color:#00f7ff;
     font-size:50px;
-    letter-spacing:8px;
+    letter-spacing:3px;
     margin-bottom:50px;
     text-shadow:
     0 0 10px #00f7ff,
     0 0 20px #00f7ff,
     0 0 40px #00f7ff;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
 }
 
 .panel-grid{
@@ -359,15 +580,19 @@ button:hover{
 .card{
     padding:35px;
     border-radius:20px;
-    border:1px solid rgba(0,255,255,0.5);
+    border:2px solid rgba(0,255,255,0.5);
     background:rgba(0,0,0,0.7);
     color:#00f7ff;
-    font-size:22px;
+    font-size:20px;
     text-align:center;
     cursor:pointer;
     transition:0.4s;
     box-shadow:0 0 15px rgba(0,255,255,0.2);
     backdrop-filter:blur(5px);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: Arial, sans-serif;
 }
 
 .card:hover{
@@ -385,7 +610,7 @@ button:hover{
     width:420px;
     padding:40px;
     background:#020b12;
-    border:1px solid #00f7ff;
+    border:2px solid #00f7ff;
     border-radius:20px;
     text-align:center;
     box-shadow:0 0 40px #00f7ff;
@@ -395,16 +620,33 @@ button:hover{
 .popup h1{
     color:#00f7ff;
     margin-bottom:20px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: Arial, sans-serif;
+    text-shadow: 0 0 15px #00f7ff;
 }
 
 .popup p{
     color:white;
     margin-bottom:25px;
-    font-size:18px;
+    font-size:16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: Arial, sans-serif;
+    font-weight: 900;
+}
+
+.popup button {
+    text-transform: uppercase;
 }
 
 ::-webkit-scrollbar{width:8px;}
-::-webkit-scrollbar-thumb{background:#00f7ff;border-radius:10px;}
+::-webkit-scrollbar-thumb{
+    background: linear-gradient(180deg, #00f7ff, #00ff00);
+    border-radius:10px;
+    box-shadow: 0 0 10px #00f7ff;
+}
 ::-webkit-scrollbar-track{background:#111;}
 
 </style>
@@ -419,81 +661,97 @@ button:hover{
     <div class="logo">
     </div>
 
-    <h2>AUTHENTICATE TO PROCEED</h2>
+    <h2>Authenticate to Proceed</h2>
 
     <input type="text" id="username" placeholder="Username">
     <input type="password" id="password" placeholder="Password">
 
-    <button onclick="login()">INITIALIZE</button>
+    <button onclick="login()">Initialize</button>
 
 </div>
 
 <div class="result-box granted" id="grantedBox">
     <div class="big-icon">✓</div>
-    <div class="granted-text">ACCESS GRANTED</div>
+    <div class="granted-text">Access Granted</div>
     <div class="small">Welcome, <span class="username">Zohaib</span></div>
     <div class="loader"></div>
 </div>
 
 <div class="transition-screen" id="transitionScreen">
+    <div class="cyber-grid"></div>
+    <div class="stars-container" id="starsContainer"></div>
     <div class="transition-content">
-        <div class="glitch-text" id="glitchText">INITIALIZING NEXUS CORE</div>
+        <div class="glitch-text" id="glitchText">Initializing Nexus Core</div>
     </div>
     <div class="scanline-effect"></div>
 </div>
 
+<div class="loading-screen" id="loadingScreen">
+    <div class="cyber-grid"></div>
+    <div class="stars-container" id="loadingStars"></div>
+    <div class="loading-container">
+        <div class="loading-title">Nexus Z Loading</div>
+        <div class="loading-bar-container">
+            <div class="loading-bar"></div>
+        </div>
+        <div class="loading-percentage" id="loadingPercentage">0%</div>
+        <div class="loading-text">System Initializing</div>
+        <div class="status-line" id="statusLine">Breaking Firewalls</div>
+    </div>
+</div>
+
 <div class="result-box granted" id="welcomePanel">
     <div class="big-icon">⚡</div>
-    <div class="granted-text">WELCOME TO</div>
-    <div class="small" style="font-size:34px;">THE PANEL OF <span class="username">NEXUS (Z) HACK</span></div>
+    <div class="granted-text">Welcome To</div>
+    <div class="small" style="font-size:34px;">The Panel of <span class="username">Nexus Z Hack</span></div>
     <div class="loader"></div>
 </div>
 
 <div class="result-box denied" id="deniedBox">
     <div class="big-icon">⚠️</div>
-    <div class="denied-text">ACCESS DENIED</div>
-    <div class="small">Incorrect username or password.</div>
+    <div class="denied-text">Access Denied</div>
+    <div class="small">Incorrect Username or Password</div>
 </div>
 
 <div class="dashboard" id="dashboard">
-    <h1 class="dashboard-title">NEXUS CONTROL CENTER</h1>
+    <h1 class="dashboard-title">Nexus Control Center</h1>
 
     <div class="panel-grid">
-<div class="card" data-title="Instagram Module" data-price="9000Rs">👩🏻‍💻Instagram Full Hack</div>
-<div class="card" data-title="Instagram Module" data-price="5000Rs">👩🏻‍💻Instagram Password Hack</div>
-<div class="card" data-title="Snapchat Module" data-price="5000Rs">👩🏻‍💻Snapchat Password Hack</div>
-<div class="card" data-title="Snapchat Module" data-price="9000Rs">👩🏻‍💻Snapchat Full Hack</div>
-<div class="card" data-title="Facebook Module" data-price="5000Rs">👩🏻‍💻Facebook Password Hack</div>
-<div class="card" data-title="Facebook Module" data-price="9000Rs">👩🏻‍💻Facebook Full Hack</div>
-<div class="card" data-title="YouTube Module" data-price="5000Rs">👩🏻‍💻You tube Hack</div>
-<div class="card" data-title="Full Mobile Control System" data-price="9000Rs">👩🏻‍💻Full Mobile Hack</div>
-<div class="card" data-title="SIM Details System" data-price="500Rs">👩🏻‍💻Sim Details</div>
-<div class="card" data-title="CNIC Information System" data-price="600Rs">👩🏻‍💻CNIC Information</div>
-<div class="card" data-title="Family Tracking System" data-price="6000Rs">👩🏻‍💻Family Tree</div>
-<div class="card" data-title="GPS Location Tracker" data-price="3000Rs">📍Location Trace</div>
-<div class="card" data-title="Camera Access Module" data-price="3000Rs">📷Camera Hack</div>
+<div class="card" data-title="Instagram Module" data-price="9000Rs">👩🏻‍💻 Instagram Full Hack</div>
+<div class="card" data-title="Instagram Module" data-price="5000Rs">👩🏻‍💻 Instagram Password Hack</div>
+<div class="card" data-title="Snapchat Module" data-price="5000Rs">👩🏻‍💻 Snapchat Password Hack</div>
+<div class="card" data-title="Snapchat Module" data-price="9000Rs">👩🏻‍💻 Snapchat Full Hack</div>
+<div class="card" data-title="Facebook Module" data-price="5000Rs">👩🏻‍💻 Facebook Password Hack</div>
+<div class="card" data-title="Facebook Module" data-price="9000Rs">👩🏻‍💻 Facebook Full Hack</div>
+<div class="card" data-title="YouTube Module" data-price="5000Rs">👩🏻‍💻 YouTube Hack</div>
+<div class="card" data-title="Full Mobile Control System" data-price="9000Rs">👩🏻‍💻 Full Mobile Hack</div>
+<div class="card" data-title="SIM Details System" data-price="500Rs">👩🏻‍💻 Sim Details</div>
+<div class="card" data-title="CNIC Information System" data-price="600Rs">👩🏻‍💻 CNIC Information</div>
+<div class="card" data-title="Family Tracking System" data-price="6000Rs">👩🏻‍💻 Family Tree</div>
+<div class="card" data-title="GPS Location Tracker" data-price="3000Rs">📍 Location Trace</div>
+<div class="card" data-title="Camera Access Module" data-price="3000Rs">📷 Camera Hack</div>
 <div class="card" data-title="Social Dashboard System" data-price="10000Rs">Social Dashboard</div>
-<div class="card" data-title="Gallery Control Module" data-price="2800Rs">📸 GALLERY MODULE</div>
-<div class="card" data-title="Mobile Device Module" data-price="16500Rs">📱 MOBILE MODULE</div>
-<div class="card" data-title="WhatsApp Control Module" data-price="3200Rs">🪀 WHATSAPP MODULE</div>
-<div class="card" data-title="Virus Simulation Tool" data-price="1000Rs">🦠 VIRUS SIMULATOR</div>
-<div class="card" data-title="Phishing Awareness Tool" data-price="2800Rs">🔥 PHISHING SIMULATION</div>
-<div class="card" data-title="Number Control System" data-price="1000Rs">🕸️ NUMBER CONTROL</div>
-<div class="card" data-title="Global Number Network" data-price="1200Rs">9️⃣9️⃣4️⃣ GLOBAL NUMBER SYSTEM</div>
-<div class="card" data-title="Transaction Demo System" data-price="500Rs">🤏 TRANSACTION DEMO APK</div>
-<div class="card" data-title="History Generator Tool" data-price="400Rs">🫶 HISTORY GENERATOR</div>
-<div class="card" data-title="Camera Module System" data-price="3100Rs">📸 CAMERA MODULE</div>
-<div class="card" data-title="TD Toolkit System" data-price="2500Rs">🔩 TD TOOLKIT</div>
-<div class="card" data-title="Fouji Toolkit System" data-price="2700Rs">🔬 FOUJI TOOLKIT</div>
-<div class="card" data-title="SMS Creator Tool" data-price="1600Rs">💬 SMS CREATOR</div>
-<div class="card" data-title="Hacker Database Access" data-price="7000Rs">🔎 HACKER DATABASE</div>
-<div class="card" data-title="Bit3Root Toolkit" data-price="4500Rs">🔰 BIT3ROOT TOOLKIT</div>
-<div class="card" data-title="Suliman Toolkit" data-price="3800Rs">🔮 SULIMAN TOOLKIT</div>
-<div class="card" data-title="Zero Tool System" data-price="5000Rs">☠️ ZERO TOOL</div>
-<div class="card" data-title="Zero Tool Advanced" data-price="6500Rs">😈 ZERO TOOL 2.0</div>
-<div class="card" data-title="WiFi Analyzer Tool" data-price="3000Rs">🛜 WIFI ANALYZER</div>
-<div class="card" data-title="Gallery Crash Test" data-price="2000Rs">👾 GALLERY CRASH TEST</div>
-<div class="card" data-title="TikTok Live Trick System" data-price="4000Rs">🎥 TIKTOK LIVE TRICK</div>
+<div class="card" data-title="Gallery Control Module" data-price="2800Rs">📸 Gallery Module</div>
+<div class="card" data-title="Mobile Device Module" data-price="16500Rs">📱 Mobile Module</div>
+<div class="card" data-title="WhatsApp Control Module" data-price="3200Rs">🪀 WhatsApp Module</div>
+<div class="card" data-title="Virus Simulation Tool" data-price="1000Rs">🦠 Virus Simulator</div>
+<div class="card" data-title="Phishing Awareness Tool" data-price="2800Rs">🔥 Phishing Simulation</div>
+<div class="card" data-title="Number Control System" data-price="1000Rs">🕸️ Number Control</div>
+<div class="card" data-title="Global Number Network" data-price="1200Rs">9️⃣9️⃣4️⃣ Global Number System</div>
+<div class="card" data-title="Transaction Demo System" data-price="500Rs">🤏 Transaction Demo APK</div>
+<div class="card" data-title="History Generator Tool" data-price="400Rs">🫶 History Generator</div>
+<div class="card" data-title="Camera Module System" data-price="3100Rs">📸 Camera Module</div>
+<div class="card" data-title="TD Toolkit System" data-price="2500Rs">🔩 TD Toolkit</div>
+<div class="card" data-title="Fouji Toolkit System" data-price="2700Rs">🔬 Fouji Toolkit</div>
+<div class="card" data-title="SMS Creator Tool" data-price="1600Rs">💬 SMS Creator</div>
+<div class="card" data-title="Hacker Database Access" data-price="7000Rs">🔎 Hacker Database</div>
+<div class="card" data-title="Bit3Root Toolkit" data-price="4500Rs">🔰 Bit3Root Toolkit</div>
+<div class="card" data-title="Suliman Toolkit" data-price="3800Rs">🔮 Suliman Toolkit</div>
+<div class="card" data-title="Zero Tool System" data-price="5000Rs">☠️ Zero Tool</div>
+<div class="card" data-title="Zero Tool Advanced" data-price="6500Rs">😈 Zero Tool 2.0</div>
+<div class="card" data-title="WiFi Analyzer Tool" data-price="3000Rs">🛜 WiFi Analyzer</div>
+<div class="card" data-title="Gallery Crash Test" data-price="2000Rs">👾 Gallery Crash Test</div>
+<div class="card" data-title="TikTok Live Trick System" data-price="4000Rs">🎥 TikTok Live Trick</div>
     </div>
 
 </div>
@@ -501,7 +759,7 @@ button:hover{
 <div class="popup" id="popup">
     <h1 id="popupTitle">Service</h1>
     <p id="popupPrice">Price</p>
-    <button onclick="closePopup()">CLOSE</button>
+    <button onclick="closePopup()">Close</button>
 </div>
 
 <audio id="successSound">
@@ -549,31 +807,90 @@ drops[i]++;
 
 setInterval(draw,35);
 
-// Sigma Boy Deep Voice - Medium Speed
-function speakSigmaVoice(text) {
+// Generate Stars
+function generateStars(containerId, count = 30) {
+    const container = document.getElementById(containerId);
+    for(let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        star.style.left = Math.random() * 100 + '%';
+        star.style.top = Math.random() * 100 + '%';
+        star.style.animationDelay = Math.random() * 2 + 's';
+        container.appendChild(star);
+    }
+}
+
+// Generate stars on load
+generateStars('starsContainer', 20);
+generateStars('loadingStars', 30);
+
+// Chitti 2.0 Medium Speed Voice
+let audioContext = null;
+
+function initAudioContext() {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    }
+}
+
+function speakChittiVoice(text) {
     return new Promise((resolve) => {
+        initAudioContext();
+        
         window.speechSynthesis.cancel();
         
         const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 1.0;
-        utterance.pitch = 0.7;
+        utterance.rate = 0.85;
+        utterance.pitch = 0.3;
         utterance.volume = 1;
         
         const voices = window.speechSynthesis.getVoices();
         
         let selectedVoice = voices.find(voice => 
-            voice.name.includes('Google UK English Male') ||
+            voice.name.includes('Google') && voice.name.includes('Male') ||
             voice.name.includes('David') ||
-            voice.name.includes('Microsoft Mark')
+            voice.name.includes('Microsoft Mark') ||
+            voice.name.includes('Alex')
         );
         
         if (!selectedVoice) {
             selectedVoice = voices.find(voice => voice.name.includes('Male'));
         }
         
+        if (!selectedVoice && voices.length > 0) {
+            selectedVoice = voices[0];
+        }
+        
         if (selectedVoice) {
             utterance.voice = selectedVoice;
         }
+        
+        utterance.onstart = () => {
+            if (audioContext) {
+                const mediaElements = document.querySelectorAll('audio');
+                mediaElements.forEach(audio => {
+                    if (!audio.src.includes('undefined')) {
+                        try {
+                            const source = audioContext.createMediaElementAudioSource(audio);
+                            const delay = audioContext.createDelay();
+                            const feedback = audioContext.createGain();
+                            const output = audioContext.createGain();
+                            
+                            delay.delayTime.value = 0.4;
+                            feedback.gain.value = 0.3;
+                            
+                            source.connect(output);
+                            source.connect(delay);
+                            delay.connect(feedback);
+                            feedback.connect(delay);
+                            delay.connect(output);
+                            output.connect(audioContext.destination);
+                        } catch(e) {
+                        }
+                    }
+                });
+            }
+        };
         
         utterance.onend = () => {
             resolve();
@@ -587,6 +904,50 @@ window.speechSynthesis.onvoiceschanged = function() {
     window.speechSynthesis.getVoices();
 };
 
+// Loading Screen with Animation
+function showLoadingScreen() {
+    return new Promise((resolve) => {
+        const loadingScreen = document.getElementById("loadingScreen");
+        const loadingPercentage = document.getElementById("loadingPercentage");
+        const statusLine = document.getElementById("statusLine");
+        
+        loadingScreen.style.display = "block";
+        
+        const statuses = [
+            "Breaking Firewalls",
+            "Accessing Mainframe",
+            "Loading Nexus Z",
+            "Initializing Systems",
+            "Verifying Credentials",
+            "Connecting To Core",
+            "System Ready",
+        ];
+        
+        let percent = 0;
+        let statusIndex = 0;
+        
+        const interval = setInterval(() => {
+            percent += Math.random() * 20;
+            if (percent > 100) percent = 100;
+            
+            loadingPercentage.textContent = Math.floor(percent) + "%";
+            
+            if (statusIndex < statuses.length && percent > statusIndex * 15) {
+                statusLine.textContent = statuses[statusIndex];
+                statusIndex++;
+            }
+            
+            if (percent >= 100) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    loadingScreen.style.display = "none";
+                    resolve();
+                }, 800);
+            }
+        }, 200);
+    });
+}
+
 // Transition Functions
 function startHeavyTransition() {
     return new Promise((resolve) => {
@@ -598,11 +959,11 @@ function startHeavyTransition() {
         transitionSound.play();
         
         const messages = [
-            "INITIALIZING NEXUS CORE",
-            "BREAKING FIREWALLS",
-            "ACCESSING MAINFRAME",
-            "LOADING NEXUS Z",
-            "SYSTEM READY"
+            "Initializing Nexus Core",
+            "Breaking Firewalls",
+            "Accessing Mainframe",
+            "Loading Nexus Z",
+            "System Ready",
         ];
         
         let index = 0;
@@ -630,20 +991,19 @@ document.getElementById("loginBox").style.display="none";
 document.getElementById("grantedBox").style.display="block";
 document.getElementById("successSound").play();
 
-// STEP 1: ACCESS GRANTED VOICE
-speakSigmaVoice("Access granted. Welcome Zohaib").then(async () => {
+speakChittiVoice("Access granted. Welcome Zohaib").then(async () => {
     
-    // STEP 2: START HEAVY TRANSITION
+    await showLoadingScreen();
+    
+    document.getElementById("grantedBox").style.display="none";
+    
     await startHeavyTransition();
     
-    // STEP 3: SHOW WELCOME PANEL
-    document.getElementById("grantedBox").style.display="none";
+    document.getElementById("transitionScreen").style.display="none";
     document.getElementById("welcomePanel").style.display="block";
     
-    // STEP 4: WELCOME PANEL VOICE
-    await speakSigmaVoice("Welcome to the panel of Nexus Z Hack");
+    await speakChittiVoice("Welcome to the panel of Nexus Z Hack");
     
-    // STEP 5: SHOW DASHBOARD
     document.getElementById("welcomePanel").style.display="none";
     document.getElementById("dashboard").style.display="block";
 });
@@ -653,9 +1013,9 @@ document.getElementById("loginBox").style.display="none";
 document.getElementById("deniedBox").style.display="block";
 document.getElementById("errorSound").play();
 
-speakSigmaVoice("Access denied. Incorrect username or password").then(() => {
+speakChittiVoice("Access denied. Incorrect username or password").then(() => {
     const retryBtn = document.createElement("button");
-    retryBtn.textContent = "RETRY";
+    retryBtn.textContent = "Retry";
     retryBtn.onclick = retry;
     document.getElementById("deniedBox").appendChild(retryBtn);
 });
@@ -666,7 +1026,7 @@ function retry(){
 document.getElementById("deniedBox").style.display="none";
 document.getElementById("loginBox").style.display="block";
 
-speakSigmaVoice("Please enter the username and password");
+speakChittiVoice("Please enter the username and password");
 }
 
 const cards = document.querySelectorAll(".card");
@@ -682,7 +1042,7 @@ cards.forEach(card => {
 
         document.getElementById("popup").style.display = "block";
         
-        speakSigmaVoice("Contact with Mister Zohaib for more information about this service");
+        speakChittiVoice("Contact with Mister Zohaib for more information about this service");
     });
 });
 
