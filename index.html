@@ -107,7 +107,7 @@ input{
     font-size:16px;
     outline:none;
     font-family: Arial, sans-serif;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 1px;
     font-weight: bold;
 }
@@ -217,7 +217,7 @@ button:hover{
     font-size:22px;
     margin-bottom:25px;
     letter-spacing: 1px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-weight: bold;
 }
 
@@ -293,7 +293,7 @@ button:hover{
         -2px -2px 0px #00ff00,
         0 0 20px #00f7ff;
     animation: glitch 0.3s infinite;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-family: Arial, sans-serif;
 }
 
@@ -442,7 +442,7 @@ button:hover{
         0 0 60px #00ff00,
         inset 0 0 20px rgba(0,255,255,0.3);
     margin-bottom: 40px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-family: Arial, sans-serif;
     animation: titleGlow 2s infinite alternate;
 }
@@ -505,7 +505,7 @@ button:hover{
     letter-spacing: 3px;
     text-shadow: 0 0 15px #00f7ff;
     margin-bottom: 20px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-family: Arial, sans-serif;
 }
 
@@ -514,7 +514,7 @@ button:hover{
     font-size: 18px;
     letter-spacing: 2px;
     margin-top: 20px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-family: Arial, sans-serif;
     font-weight: 900;
     animation: blink 1s infinite;
@@ -530,7 +530,7 @@ button:hover{
     color: #ff00ff;
     font-size: 18px;
     letter-spacing: 2px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-family: Arial, sans-serif;
     font-weight: 900;
     animation: statusFlash 1s infinite;
@@ -567,7 +567,7 @@ button:hover{
     0 0 20px #00f7ff,
     0 0 40px #00f7ff;
     font-weight: 900;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-family: Arial, sans-serif;
 }
 
@@ -590,7 +590,7 @@ button:hover{
     box-shadow:0 0 15px rgba(0,255,255,0.2);
     backdrop-filter:blur(5px);
     font-weight: 900;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 1px;
     font-family: Arial, sans-serif;
 }
@@ -621,7 +621,7 @@ button:hover{
     color:#00f7ff;
     margin-bottom:20px;
     font-weight: 900;
-    text-transform: uppercase;
+    text-transform: lowercase;
     letter-spacing: 2px;
     font-family: Arial, sans-serif;
     text-shadow: 0 0 15px #00f7ff;
@@ -632,13 +632,13 @@ button:hover{
     margin-bottom:25px;
     font-size:16px;
     letter-spacing: 1px;
-    text-transform: uppercase;
+    text-transform: lowercase;
     font-family: Arial, sans-serif;
     font-weight: 900;
 }
 
 .popup button {
-    text-transform: uppercase;
+    text-transform: lowercase;
 }
 
 ::-webkit-scrollbar{width:8px;}
@@ -648,6 +648,134 @@ button:hover{
     box-shadow: 0 0 10px #00f7ff;
 }
 ::-webkit-scrollbar-track{background:#111;}
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        max-width: 400px;
+        padding: 30px;
+    }
+
+    h2 {
+        font-size: 20px;
+        margin-bottom: 25px;
+    }
+
+    input {
+        padding: 12px;
+        font-size: 14px;
+        margin: 12px 0;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
+    .result-box {
+        width: 90%;
+        max-width: 480px;
+        padding: 40px 20px;
+    }
+
+    .granted-text {
+        font-size: 36px;
+    }
+
+    .denied-text {
+        font-size: 32px;
+    }
+
+    .small {
+        font-size: 18px;
+    }
+
+    .big-icon {
+        font-size: 60px;
+    }
+
+    .glitch-text {
+        font-size: 36px;
+        letter-spacing: 2px;
+    }
+
+    .loading-title {
+        font-size: 36px;
+        letter-spacing: 2px;
+    }
+
+    .loading-percentage {
+        font-size: 24px;
+    }
+
+    .loading-text {
+        font-size: 14px;
+    }
+
+    .status-line {
+        font-size: 14px;
+    }
+
+    .dashboard-title {
+        font-size: 32px;
+        margin-bottom: 30px;
+    }
+
+    .panel-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .card {
+        padding: 20px;
+        font-size: 16px;
+    }
+
+    .popup {
+        width: 85%;
+        max-width: 380px;
+        padding: 30px;
+    }
+
+    .popup h1 {
+        font-size: 18px;
+    }
+
+    .popup p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 25px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .dashboard-title {
+        font-size: 24px;
+    }
+
+    .card {
+        padding: 15px;
+        font-size: 14px;
+    }
+
+    .popup {
+        width: 90%;
+        padding: 25px;
+    }
+}
 
 </style>
 </head>
@@ -663,8 +791,8 @@ button:hover{
 
     <h2>Authenticate to Proceed</h2>
 
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
+    <input type="text" id="username" placeholder="username">
+    <input type="password" id="password" placeholder="password">
 
     <button onclick="login()">Initialize</button>
 
@@ -673,7 +801,7 @@ button:hover{
 <div class="result-box granted" id="grantedBox">
     <div class="big-icon">✓</div>
     <div class="granted-text">Access Granted</div>
-    <div class="small">Welcome, <span class="username">Zohaib</span></div>
+    <div class="small">Welcome, <span class="username" id="usernameDisplay">zohaib</span></div>
     <div class="loader"></div>
 </div>
 
@@ -681,7 +809,7 @@ button:hover{
     <div class="cyber-grid"></div>
     <div class="stars-container" id="starsContainer"></div>
     <div class="transition-content">
-        <div class="glitch-text" id="glitchText">Initializing Nexus Core</div>
+        <div class="glitch-text" id="glitchText">initializing nexus core</div>
     </div>
     <div class="scanline-effect"></div>
 </div>
@@ -690,20 +818,20 @@ button:hover{
     <div class="cyber-grid"></div>
     <div class="stars-container" id="loadingStars"></div>
     <div class="loading-container">
-        <div class="loading-title">Nexus Z Loading</div>
+        <div class="loading-title">nexus z loading</div>
         <div class="loading-bar-container">
             <div class="loading-bar"></div>
         </div>
         <div class="loading-percentage" id="loadingPercentage">0%</div>
-        <div class="loading-text">System Initializing</div>
-        <div class="status-line" id="statusLine">Breaking Firewalls</div>
+        <div class="loading-text">system initializing</div>
+        <div class="status-line" id="statusLine">breaking firewalls</div>
     </div>
 </div>
 
 <div class="result-box granted" id="welcomePanel">
     <div class="big-icon">⚡</div>
     <div class="granted-text">Welcome To</div>
-    <div class="small" style="font-size:34px;">The Panel of <span class="username">Nexus Z Hack</span></div>
+    <div class="small" style="font-size:34px;">The Panel of <span class="username">nexus z hack</span></div>
     <div class="loader"></div>
 </div>
 
@@ -714,50 +842,50 @@ button:hover{
 </div>
 
 <div class="dashboard" id="dashboard">
-    <h1 class="dashboard-title">Nexus Control Center</h1>
+    <h1 class="dashboard-title">nexus control center</h1>
 
     <div class="panel-grid">
-<div class="card" data-title="Instagram Module" data-price="9000Rs">👩🏻‍💻 Instagram Full Hack</div>
-<div class="card" data-title="Instagram Module" data-price="5000Rs">👩🏻‍💻 Instagram Password Hack</div>
-<div class="card" data-title="Snapchat Module" data-price="5000Rs">👩🏻‍💻 Snapchat Password Hack</div>
-<div class="card" data-title="Snapchat Module" data-price="9000Rs">👩🏻‍💻 Snapchat Full Hack</div>
-<div class="card" data-title="Facebook Module" data-price="5000Rs">👩🏻‍💻 Facebook Password Hack</div>
-<div class="card" data-title="Facebook Module" data-price="9000Rs">👩🏻‍💻 Facebook Full Hack</div>
-<div class="card" data-title="YouTube Module" data-price="5000Rs">👩🏻‍💻 YouTube Hack</div>
-<div class="card" data-title="Full Mobile Control System" data-price="9000Rs">👩🏻‍💻 Full Mobile Hack</div>
-<div class="card" data-title="SIM Details System" data-price="500Rs">👩🏻‍💻 Sim Details</div>
-<div class="card" data-title="CNIC Information System" data-price="600Rs">👩🏻‍💻 CNIC Information</div>
-<div class="card" data-title="Family Tracking System" data-price="6000Rs">👩🏻‍💻 Family Tree</div>
-<div class="card" data-title="GPS Location Tracker" data-price="3000Rs">📍 Location Trace</div>
-<div class="card" data-title="Camera Access Module" data-price="3000Rs">📷 Camera Hack</div>
-<div class="card" data-title="Social Dashboard System" data-price="10000Rs">Social Dashboard</div>
-<div class="card" data-title="Gallery Control Module" data-price="2800Rs">📸 Gallery Module</div>
-<div class="card" data-title="Mobile Device Module" data-price="16500Rs">📱 Mobile Module</div>
-<div class="card" data-title="WhatsApp Control Module" data-price="3200Rs">🪀 WhatsApp Module</div>
-<div class="card" data-title="Virus Simulation Tool" data-price="1000Rs">🦠 Virus Simulator</div>
-<div class="card" data-title="Phishing Awareness Tool" data-price="2800Rs">🔥 Phishing Simulation</div>
-<div class="card" data-title="Number Control System" data-price="1000Rs">🕸️ Number Control</div>
-<div class="card" data-title="Global Number Network" data-price="1200Rs">9️⃣9️⃣4️⃣ Global Number System</div>
-<div class="card" data-title="Transaction Demo System" data-price="500Rs">🤏 Transaction Demo APK</div>
-<div class="card" data-title="History Generator Tool" data-price="400Rs">🫶 History Generator</div>
-<div class="card" data-title="Camera Module System" data-price="3100Rs">📸 Camera Module</div>
-<div class="card" data-title="TD Toolkit System" data-price="2500Rs">🔩 TD Toolkit</div>
-<div class="card" data-title="Fouji Toolkit System" data-price="2700Rs">🔬 Fouji Toolkit</div>
-<div class="card" data-title="SMS Creator Tool" data-price="1600Rs">💬 SMS Creator</div>
-<div class="card" data-title="Hacker Database Access" data-price="7000Rs">🔎 Hacker Database</div>
-<div class="card" data-title="Bit3Root Toolkit" data-price="4500Rs">🔰 Bit3Root Toolkit</div>
-<div class="card" data-title="Suliman Toolkit" data-price="3800Rs">🔮 Suliman Toolkit</div>
-<div class="card" data-title="Zero Tool System" data-price="5000Rs">☠️ Zero Tool</div>
-<div class="card" data-title="Zero Tool Advanced" data-price="6500Rs">😈 Zero Tool 2.0</div>
-<div class="card" data-title="WiFi Analyzer Tool" data-price="3000Rs">🛜 WiFi Analyzer</div>
-<div class="card" data-title="Gallery Crash Test" data-price="2000Rs">👾 Gallery Crash Test</div>
-<div class="card" data-title="TikTok Live Trick System" data-price="4000Rs">🎥 TikTok Live Trick</div>
+<div class="card" data-title="instagram module" data-price="9000Rs">👩🏻‍💻 instagram full hack</div>
+<div class="card" data-title="instagram module" data-price="5000Rs">👩🏻‍💻 instagram password hack</div>
+<div class="card" data-title="snapchat module" data-price="5000Rs">👩🏻‍💻 snapchat password hack</div>
+<div class="card" data-title="snapchat module" data-price="9000Rs">👩🏻‍💻 snapchat full hack</div>
+<div class="card" data-title="facebook module" data-price="5000Rs">👩🏻‍💻 facebook password hack</div>
+<div class="card" data-title="facebook module" data-price="9000Rs">👩🏻‍💻 facebook full hack</div>
+<div class="card" data-title="youtube module" data-price="5000Rs">👩🏻‍💻 youtube hack</div>
+<div class="card" data-title="full mobile control system" data-price="9000Rs">👩🏻‍💻 full mobile hack</div>
+<div class="card" data-title="sim details system" data-price="500Rs">👩🏻‍💻 sim details</div>
+<div class="card" data-title="cnic information system" data-price="600Rs">👩🏻‍💻 cnic information</div>
+<div class="card" data-title="family tracking system" data-price="6000Rs">👩🏻‍💻 family tree</div>
+<div class="card" data-title="gps location tracker" data-price="3000Rs">📍 location trace</div>
+<div class="card" data-title="camera access module" data-price="3000Rs">📷 camera hack</div>
+<div class="card" data-title="social dashboard system" data-price="10000Rs">social dashboard</div>
+<div class="card" data-title="gallery control module" data-price="2800Rs">📸 gallery module</div>
+<div class="card" data-title="mobile device module" data-price="16500Rs">📱 mobile module</div>
+<div class="card" data-title="whatsapp control module" data-price="3200Rs">🪀 whatsapp module</div>
+<div class="card" data-title="virus simulation tool" data-price="1000Rs">🦠 virus simulator</div>
+<div class="card" data-title="phishing awareness tool" data-price="2800Rs">🔥 phishing simulation</div>
+<div class="card" data-title="number control system" data-price="1000Rs">🕸️ number control</div>
+<div class="card" data-title="global number network" data-price="1200Rs">9️⃣9️⃣4️⃣ global number system</div>
+<div class="card" data-title="transaction demo system" data-price="500Rs">🤏 transaction demo apk</div>
+<div class="card" data-title="history generator tool" data-price="400Rs">🫶 history generator</div>
+<div class="card" data-title="camera module system" data-price="3100Rs">📸 camera module</div>
+<div class="card" data-title="td toolkit system" data-price="2500Rs">🔩 td toolkit</div>
+<div class="card" data-title="fouji toolkit system" data-price="2700Rs">🔬 fouji toolkit</div>
+<div class="card" data-title="sms creator tool" data-price="1600Rs">💬 sms creator</div>
+<div class="card" data-title="hacker database access" data-price="7000Rs">🔎 hacker database</div>
+<div class="card" data-title="bit3root toolkit" data-price="4500Rs">🔰 bit3root toolkit</div>
+<div class="card" data-title="suliman toolkit" data-price="3800Rs">🔮 suliman toolkit</div>
+<div class="card" data-title="zero tool system" data-price="5000Rs">☠️ zero tool</div>
+<div class="card" data-title="zero tool advanced" data-price="6500Rs">😈 zero tool 2.0</div>
+<div class="card" data-title="wifi analyzer tool" data-price="3000Rs">🛜 wifi analyzer</div>
+<div class="card" data-title="gallery crash test" data-price="2000Rs">👾 gallery crash test</div>
+<div class="card" data-title="tiktok live trick system" data-price="4000Rs">🎥 tiktok live trick</div>
     </div>
 
 </div>
 
 <div class="popup" id="popup">
-    <h1 id="popupTitle">Service</h1>
+    <h1 id="popupTitle">service</h1>
     <p id="popupPrice">Price</p>
     <button onclick="closePopup()">Close</button>
 </div>
@@ -914,13 +1042,13 @@ function showLoadingScreen() {
         loadingScreen.style.display = "block";
         
         const statuses = [
-            "Breaking Firewalls",
-            "Accessing Mainframe",
-            "Loading Nexus Z",
-            "Initializing Systems",
-            "Verifying Credentials",
-            "Connecting To Core",
-            "System Ready",
+            "breaking firewalls",
+            "accessing mainframe",
+            "loading nexus z",
+            "initializing systems",
+            "verifying credentials",
+            "connecting to core",
+            "system ready",
         ];
         
         let percent = 0;
@@ -959,11 +1087,11 @@ function startHeavyTransition() {
         transitionSound.play();
         
         const messages = [
-            "Initializing Nexus Core",
-            "Breaking Firewalls",
-            "Accessing Mainframe",
-            "Loading Nexus Z",
-            "System Ready",
+            "initializing nexus core",
+            "breaking firewalls",
+            "accessing mainframe",
+            "loading nexus z",
+            "system ready",
         ];
         
         let index = 0;
@@ -986,12 +1114,12 @@ function login(){
 let user=document.getElementById("username").value;
 let pass=document.getElementById("password").value;
 
-if(user==="Zohaib" && pass==="1122"){
+if(user==="zohaib" && pass==="1122"){
 document.getElementById("loginBox").style.display="none";
 document.getElementById("grantedBox").style.display="block";
 document.getElementById("successSound").play();
 
-speakChittiVoice("Access granted. Welcome Zohaib").then(async () => {
+speakChittiVoice("Access granted. Welcome zohaib").then(async () => {
     
     await showLoadingScreen();
     
@@ -1002,7 +1130,7 @@ speakChittiVoice("Access granted. Welcome Zohaib").then(async () => {
     document.getElementById("transitionScreen").style.display="none";
     document.getElementById("welcomePanel").style.display="block";
     
-    await speakChittiVoice("Welcome to the panel of Nexus Z Hack");
+    await speakChittiVoice("Welcome to the panel of nexus z hack");
     
     document.getElementById("welcomePanel").style.display="none";
     document.getElementById("dashboard").style.display="block";
@@ -1042,7 +1170,7 @@ cards.forEach(card => {
 
         document.getElementById("popup").style.display = "block";
         
-        speakChittiVoice("Contact with Mister Zohaib for more information about this service");
+        speakChittiVoice("Contact with Mister zohaib for more information about this service");
     });
 });
 
